@@ -14,10 +14,17 @@ public class Enemy : MonoBehaviour
     public float hurtForce;
     public Vector3 faceDir;
     [HideInInspector] public Transform attacker;
+    [Header("检测")]
+    public Vector2 centerOffset;
+    public Vector2 checkSize;
+    public float checkDistance;
+    public LayerMask attackLayer;
     [Header("计时器")]
     public float waitTime;
     public float waitTimeCounter;
     public bool wait;
+    public float lostTime;
+    public float lostTimeCounter;
     [Header("状态")]
     public bool isHurt;
     public bool isDie;
@@ -69,6 +76,7 @@ public class Enemy : MonoBehaviour
     //敌人的计时系统
     public void TimeCounter()
     {
+        //靠墙停止等待时间计时
         if (wait)
         {
             waitTimeCounter -= Time.deltaTime;
@@ -79,7 +87,35 @@ public class Enemy : MonoBehaviour
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
             }
         }
+        //失去玩家目标计时
+        if (!FoundPlayer()&&lostTimeCounter>0)
+        {
+            lostTimeCounter -= Time.deltaTime;
+        }
+        else if(FoundPlayer())
+        {
+            lostTimeCounter = lostTime;
+        }
     }
+    //敌人检测玩家
+    public bool FoundPlayer()
+    {
+        return Physics2D.BoxCast(transform.position+(Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
+    }
+    //切换状态
+    public void SwitchState(NPCState state)
+    {
+        var newState = state switch
+        {
+            NPCState.Patrol => patrolState,
+            NPCState.Chase => chaseState,
+            _ => null
+        };
+        currentState.OnExit();
+        currentState = newState;
+        currentState.OnEnter(this);
+    }
+    #region  事件执行方法
     //敌人受伤动画
     public void OnTakeDamage(Transform attackTrans)
     {
@@ -97,7 +133,7 @@ public class Enemy : MonoBehaviour
         isHurt = true;
         animator.SetTrigger("hurt");
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
-
+        rb.velocity = new Vector2(0,rb.velocity.y);
         StartCoroutine(OnHurt(dir));
     }
     //携程方法，按顺序执行被被击退
@@ -118,5 +154,11 @@ public class Enemy : MonoBehaviour
     public void DestroyAnimation()
     {
         Destroy(this.gameObject);
+    }
+    #endregion
+    //绘制检测范围
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position+(Vector3)centerOffset+new Vector3(checkDistance*-transform.localScale.x,0),0.2f);
     }
 }
