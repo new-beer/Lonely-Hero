@@ -752,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 283392059}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Attack Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 416151943}
   - component: {fileID: 416151944}
   - component: {fileID: 416151945}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Attack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 470653071}
   - component: {fileID: 470653073}
   - component: {fileID: 470653074}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Attack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1367,6 +1367,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   invulnerableDuration: 1.5
+  invulnerableCounter: 0
   invulnerable: 0
   OnTakeDamage:
     m_PersistentCalls:
@@ -1746,7 +1747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
-  invulnerableDuration: 1
+  invulnerableDuration: 0.1
+  invulnerableCounter: 0
   invulnerable: 0
   OnTakeDamage:
     m_PersistentCalls:
@@ -2118,6 +2120,7 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 0
   invulnerableDuration: 0.7
+  invulnerableCounter: 0
   invulnerable: 0
   OnTakeDamage:
     m_PersistentCalls:
@@ -2252,7 +2255,7 @@ GameObject:
   - component: {fileID: 1247672258}
   - component: {fileID: 1247672259}
   - component: {fileID: 1247672260}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Attack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

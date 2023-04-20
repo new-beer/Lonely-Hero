@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     private BaseState currentState;//当前状态
     protected BaseState patrolState; //巡逻状态
     protected BaseState chaseState; //追击状态
+    protected BaseState skillState; //技能状态
 
     protected virtual void Awake()
     {
@@ -41,6 +42,7 @@ public class Enemy : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
+        lostTimeCounter = lostTime;
     }
     //物体被激活函数
     private void OnEnable()
@@ -73,7 +75,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Move()
     {
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("premove"))
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("premove") && !animator.GetCurrentAnimatorStateInfo(0).IsName("recover"))
             rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
     }
     //敌人的计时系统
@@ -112,6 +114,7 @@ public class Enemy : MonoBehaviour
         {
             NPCState.Patrol => patrolState,
             NPCState.Chase => chaseState,
+            NPCState.Skill =>skillState,
             _ => null
         };
         currentState.OnExit();

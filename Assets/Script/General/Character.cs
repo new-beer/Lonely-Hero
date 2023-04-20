@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     public float currentHealth;
     [Header("受伤无敌")]
     public float invulnerableDuration; //无敌时间
-    private float invulnerableCounter; //计数器
+    [HideInInspector]public float invulnerableCounter; //计数器
     public bool invulnerable; //无敌状态
     public UnityEvent<Transform> OnTakeDamage; //创建被攻击事件
     public UnityEvent OnDie; //创建死亡事件
