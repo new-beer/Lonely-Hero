@@ -5,15 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     protected Rigidbody2D rb;
-    protected Animator animator;
-    PhysicsCheck physicsCheck;
+    [HideInInspector]public Animator animator;
+    [HideInInspector]public PhysicsCheck physicsCheck;
     [Header("基本参数")]
     public float normalSpeed;
     public float chaseSpeed; //冲撞速度
-    public float currentSpeed;
+    [HideInInspector]public float currentSpeed;
     public float hurtForce;
     public Vector3 faceDir;
-    public Transform attacker;
+    [HideInInspector] public Transform attacker;
     [Header("计时器")]
     public float waitTime;
     public float waitTimeCounter;
@@ -21,8 +21,11 @@ public class Enemy : MonoBehaviour
     [Header("状态")]
     public bool isHurt;
     public bool isDie;
+    private BaseState currentState;//当前状态
+    protected BaseState patrolState; //巡逻状态
+    protected BaseState chaseState; //追击状态
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -30,28 +33,38 @@ public class Enemy : MonoBehaviour
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
     }
+    //物体被激活函数
+    private void OnEnable()
+    {
+        currentState = patrolState;
+        currentState.OnEnter(this);
+    }
     private void Update()
     {
         //敌人的朝向
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
-        //如果检测到墙体转向
-        if((physicsCheck.touchLeftWall&&faceDir.x<0) || (physicsCheck.touchRightWall&&faceDir.x>0))
-        {
-            wait = true;
-            animator.SetBool("walk", false);
-        }
+        
+        //执行逻辑UpDate
+        currentState.LogicUpdate();
         //在碰墙时停留
         TimeCounter();
 
     }
     private void FixedUpdate()
     {
-        Move();
+        if (!isHurt && !isDie&&!wait)
+            Move();
+        //物理逻辑判断
+        currentState.PhysicsUpdate();
+    }
+    //物体消失函数
+    private void OnDisable()
+    {
+        currentState.OnExit();
     }
     public virtual void Move()
     {
-        if(!isHurt&&!isDie)
-            rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
     }
     //敌人的计时系统
     public void TimeCounter()
