@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(PhysicsCheck))] 
+
 public class Enemy : MonoBehaviour
 {
     protected Rigidbody2D rb;
@@ -71,7 +73,8 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Move()
     {
-        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("premove"))
+            rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
     }
     //敌人的计时系统
     public void TimeCounter()
