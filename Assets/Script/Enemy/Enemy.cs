@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Move()
     {
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("premove") && !animator.GetCurrentAnimatorStateInfo(0).IsName("recover"))
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("premove") && !animator.GetCurrentAnimatorStateInfo(0).IsName("recover"))//针对蜗牛
             rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
     }
     //敌人的计时系统

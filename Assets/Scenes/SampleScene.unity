@@ -1522,6 +1522,106 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &662344390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662344391}
+  - component: {fileID: 662344393}
+  - component: {fileID: 662344392}
+  m_Layer: 8
+  m_Name: Attack Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &662344391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662344390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1038713543}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &662344392
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662344390}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.36370873, y: -0.37300634}
+      - {x: -0.59845465, y: -0.1526053}
+      - {x: -0.8029654, y: -0.5569992}
+      - {x: -0.7559615, y: -0.9831718}
+      - {x: -0.2590275, y: -0.91168547}
+      - {x: -0.024684072, y: -0.6310518}
+      - {x: -0.0027876794, y: -0.50316346}
+  m_UseDelaunayMesh: 0
+--- !u!114 &662344393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662344390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df90e46acc1f3a648b4bfcbb782ecbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  attackRang: 0
+  attackRate: 0
 --- !u!1 &813353079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e0dfe657db8ae4fbb4880679679026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   animator: {fileID: 0}
   physicsCheck: {fileID: 0}
   normalSpeed: 60
@@ -1633,6 +1734,7 @@ MonoBehaviour:
   currentSpeed: 0
   hurtForce: 3
   faceDir: {x: 0, y: 0, z: 0}
+  spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0.6}
   checkSize: {x: 1, y: 1}
@@ -1875,6 +1977,8 @@ GameObject:
   - component: {fileID: 1038713539}
   - component: {fileID: 1038713538}
   - component: {fileID: 1038713537}
+  - component: {fileID: 1038713545}
+  - component: {fileID: 1038713544}
   m_Layer: 8
   m_Name: Bee
   m_TagString: Untagged
@@ -1929,27 +2033,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7301aa7f1457b834fae3b9c167ff8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   animator: {fileID: 0}
   physicsCheck: {fileID: 0}
-  normalSpeed: 0
-  chaseSpeed: 0
+  normalSpeed: 60
+  chaseSpeed: 200
   currentSpeed: 0
-  hurtForce: 0
+  hurtForce: 3
   faceDir: {x: 0, y: 0, z: 0}
+  spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0}
   checkSize: {x: 0, y: 0}
-  checkDistance: 0
+  checkDistance: 4
   attackLayer:
     serializedVersion: 2
-    m_Bits: 0
-  waitTime: 0
+    m_Bits: 128
+  waitTime: 2
   waitTimeCounter: 0
   wait: 0
-  lostTime: 0
+  lostTime: 4
   lostTimeCounter: 0
   isHurt: 0
   isDie: 0
+  patrolRadius: 4.85
 --- !u!114 &1038713539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2009,7 +2116,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2019,7 +2126,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &1038713542
 SpriteRenderer:
@@ -2081,13 +2188,76 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038713536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.51, z: 0}
+  m_LocalPosition: {x: 0, y: 7.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 662344391}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1038713544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038713536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad430260b90b0d429be5cc479114acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0
+  invulnerableDuration: 1
+  invulnerableCounter: 0
+  invulnerable: 0
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1038713538}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnTakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1038713538}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1038713545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038713536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df90e46acc1f3a648b4bfcbb782ecbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackRang: 1.1
+  attackRate: 1
 --- !u!1 &1197309103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ce31c350fea054b8956d7bf2ab0249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   animator: {fileID: 0}
   physicsCheck: {fileID: 0}
   normalSpeed: 100
@@ -2435,6 +2606,7 @@ MonoBehaviour:
   currentSpeed: 0
   hurtForce: 4.5
   faceDir: {x: 0, y: 0, z: 0}
+  spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0.65}
   checkSize: {x: 1, y: 1}
