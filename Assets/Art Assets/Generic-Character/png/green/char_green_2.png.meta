@@ -485,7 +485,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_green_2_18
+      name: walljump1
       rect:
         serializedVersion: 2
         x: 0
@@ -506,7 +506,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_green_2_19
+      name: walljump2
       rect:
         serializedVersion: 2
         x: 56
@@ -527,7 +527,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_green_2_20
+      name: walljump3
       rect:
         serializedVersion: 2
         x: 112
@@ -548,7 +548,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_green_2_21
+      name: walljump4
       rect:
         serializedVersion: 2
         x: 168
@@ -965,10 +965,6 @@ TextureImporter:
       char_green_2_15: -1443448201
       char_green_2_16: -86800461
       char_green_2_17: -1611447509
-      char_green_2_18: 1108167317
-      char_green_2_19: 711962107
-      char_green_2_20: 1242632911
-      char_green_2_21: 271783308
       char_green_2_22: 1371684428
       char_green_2_23: 1465217211
       char_green_2_24: 1271825944
@@ -997,6 +993,10 @@ TextureImporter:
       walk7: 850111899
       walk8: -2000605321
       walk9: -1127510637
+      walljump1: 1108167317
+      walljump2: 711962107
+      walljump3: 1242632911
+      walljump4: 271783308
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

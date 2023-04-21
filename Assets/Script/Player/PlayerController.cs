@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("基本参数")]
     public float speed;
     public float jumpForce;
+    public float wallJumpForce;
     public float hurtForce;
     private float runSpeed;
     private float walkSpeed => runSpeed/2.5f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool isHurt;
     public bool isDie;
     public bool isAttack;
+    public bool wallJump;
     [Header("物理材质")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
         #endregion
         //检测Attack键被按压
         inputControl.Player.Attack.started += PlayerAttack;
-
+        //physicsCheck.isPlayer = true;
     }
     private void OnEnable()
     {
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
     //人物位置移动
     public void Move()
     {
-        if(!isCrouch)
+        if(!isCrouch&&!wallJump)
             rb.velocity = new Vector2(inputDirection.x*speed*Time.deltaTime,rb.velocity.y);
         //人物翻转
         //if (inputDirection.x > 0)
@@ -130,8 +132,16 @@ public class PlayerController : MonoBehaviour
     //跳跃
     public void Jump(InputAction.CallbackContext obj)
     {
-        if(physicsCheck.isGround)
+        if (physicsCheck.isGround)
+        {
             rb.AddForce(transform.up * jumpForce,ForceMode2D.Impulse);
+
+        }
+        else if (physicsCheck.onWall)
+        {
+            rb.AddForce(new Vector2(-inputDirection.x,2.5f)*wallJumpForce,ForceMode2D.Impulse);
+            wallJump = true;
+        }
     }
     //攻击方法
     private void PlayerAttack(InputAction.CallbackContext obj)
@@ -165,6 +175,16 @@ public class PlayerController : MonoBehaviour
     {
         //碰撞体材质取决于是否跳跃
         capsuleCollider2D.sharedMaterial = physicsCheck.isGround ? normal : wall;
+        //判断是否在墙面，更改下降速度
+        if (physicsCheck.onWall)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+        }
+        //判断是否死亡，死亡更换标签
         if (isDie)
         {
             gameObject.layer = LayerMask.NameToLayer("Enemy");
@@ -172,6 +192,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
+        }
+        //在空中下落时可调整方向
+        if(wallJump && rb.velocity.y < 0f)
+        {
+            wallJump = false;
         }
     }
 }

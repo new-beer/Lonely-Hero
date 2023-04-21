@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 32749
+  controlID: 32983
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 32750
+  controlID: 32984
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 5}
   - {fileID: 6}
   m_Selected: 0
-  m_LastSelected: 0
+  m_LastSelected: 1
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -545,9 +545,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 294.75668, y: 974.92365, z: 0}
+    m_Target: {x: -5.602704, y: 0.22384356, z: 0.0027941545}
     speed: 2
-    m_Value: {x: 294.75668, y: 974.92365, z: 0}
+    m_Value: {x: -5.602704, y: 0.22384356, z: 0.0027941545}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -597,9 +597,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 152.13754
+    m_Target: 2.953741
     speed: 2
-    m_Value: 152.13754
+    m_Value: 2.953741
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -669,14 +669,14 @@ MonoBehaviour:
     - {fileID: 8669664147890974842, guid: 4b89ea59c22f01143a31e542edf7741c, type: 2}
     - {fileID: 8706933267028670322, guid: 8f1cb4f0ec2a8634c9c6500c126fbf0a, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.7346534
+    - e00: 0.64970344
       e01: 0
       e02: 0
-      e03: -7.039612
+      e03: 73.701935
       e10: 0
-      e11: 0.7346534
+      e11: 0.64970344
       e12: 0
-      e13: 2.3307037
+      e13: 59.392273
       e20: 0
       e21: 0
       e22: 1
@@ -798,9 +798,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 8f1cb4f0ec2a8634c9c6500c126fbf0a, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: d6d6dc781da568646b66b29ad59b0302, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 8706933267028670322, guid: 8f1cb4f0ec2a8634c9c6500c126fbf0a, type: 2}
+  - m_Target: {fileID: 3924813520101715537, guid: d6d6dc781da568646b66b29ad59b0302, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -837,7 +837,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 32751
+  controlID: 32985
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -935,7 +935,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1087690
+  m_LastSelectedObjectID: 29818
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 32773
+  controlID: 33007
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1006,8 +1006,8 @@ MonoBehaviour:
     y: 0
     width: 231.19995
     height: 460
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -1056,18 +1056,18 @@ MonoBehaviour:
       m_ExpandedIDs: a05ff0fffc83f0ffb2e5f1ffaeecf3ff9a50f4ff16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: //Enemy
+        m_OriginalName: //Enemy
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -763666
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 13}
       m_SearchString: 
@@ -1184,7 +1184,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/ScriptableObject
+    - Assets/Art Assets/Generic-Character/png/green
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1224,10 +1224,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 8}
+    scrollPos: {x: 0, y: 600}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000821c0000ec740000b87a0000bc7a0000c07a0000c27a0000c47a0000c87a0000ca7a0000cc7a0000d47a0000a87c0000b47c0000268a0000a895000092970000
+    m_ExpandedIDs: ffffffff00000000821c0000ec740000b87a0000ba7a0000c07a0000c27a0000c47a0000c87a0000ca7a0000cc7a0000d47a0000a67c0000e27d0000268a00008e8b000092970000209d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
