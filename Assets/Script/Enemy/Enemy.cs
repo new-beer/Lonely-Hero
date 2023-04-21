@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected Rigidbody2D rb;
+    [HideInInspector]public Rigidbody2D rb;
     [HideInInspector]public Animator animator;
     [HideInInspector]public PhysicsCheck physicsCheck;
     [Header("基本参数")]
@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]public float currentSpeed;
     public float hurtForce;
     public Vector3 faceDir;
+    public Vector3 spwanPoint;
     [HideInInspector] public Transform attacker;
     [Header("检测")]
     public Vector2 centerOffset;
@@ -43,6 +44,7 @@ public class Enemy : MonoBehaviour
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         lostTimeCounter = lostTime;
+        spwanPoint = transform.position;
     }
     //物体被激活函数
     private void OnEnable()
@@ -103,7 +105,7 @@ public class Enemy : MonoBehaviour
         }
     }
     //敌人检测玩家
-    public bool FoundPlayer()
+    public virtual bool FoundPlayer()
     {
         return Physics2D.BoxCast(transform.position+(Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
     }
@@ -122,6 +124,11 @@ public class Enemy : MonoBehaviour
         currentState.OnEnter(this);
     }
     #region  事件执行方法
+    //获得新的坐标点
+    public virtual Vector3 GetNewPoint()
+    {
+        return transform.position;
+    }
     //敌人受伤动画
     public void OnTakeDamage(Transform attackTrans)
     {
@@ -163,7 +170,7 @@ public class Enemy : MonoBehaviour
     }
     #endregion
     //绘制检测范围
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position+(Vector3)centerOffset+new Vector3(checkDistance*-transform.localScale.x,0),0.2f);
     }
