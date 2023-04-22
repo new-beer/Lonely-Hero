@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
-        waitTimeCounter = waitTime;
+        //waitTimeCounter = waitTime;
         lostTimeCounter = lostTime;
         spwanPoint = transform.position;
     }
