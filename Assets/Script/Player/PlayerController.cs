@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -14,11 +15,15 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimation playerAnimation;
     private PhysicsCheck physicsCheck;
     private SpriteRenderer spriteRenderer;
+    private Character character;
     [Header("基本参数")]
     public float speed;
     public float jumpForce;
     public float wallJumpForce;
     public float hurtForce;
+    public float slideDistance;
+    public float slideSpeed;
+    public int slidePowerCost;
     private float runSpeed;
     private float walkSpeed => runSpeed/2.5f;
     private Vector2 originalOffset;
@@ -29,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public bool isDie;
     public bool isAttack;
     public bool wallJump;
+    public bool isSlide;
     [Header("物理材质")]
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D wall;
@@ -40,6 +46,7 @@ public class PlayerController : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        character = GetComponent<Character>();
         originalOffset = capsuleCollider2D.offset;
         originalSize = capsuleCollider2D.size;
         //检测jump键被按压
@@ -65,7 +72,12 @@ public class PlayerController : MonoBehaviour
         //检测Attack键被按压
         inputControl.Player.Attack.started += PlayerAttack;
         //physicsCheck.isPlayer = true;
+        //滑铲
+        inputControl.Player.Slide.started += Slide;
     }
+
+   
+
     private void OnEnable()
     {
         inputControl.Enable();
@@ -132,11 +144,15 @@ public class PlayerController : MonoBehaviour
     //跳跃
     public void Jump(InputAction.CallbackContext obj)
     {
+        //正常跳跃
         if (physicsCheck.isGround)
         {
             rb.AddForce(transform.up * jumpForce,ForceMode2D.Impulse);
-
+            //跳跃打断滑铲协程
+            isSlide = false;
+            StopAllCoroutines();
         }
+        //贴墙跳
         else if (physicsCheck.onWall)
         {
             rb.AddForce(new Vector2(-inputDirection.x,2.5f)*wallJumpForce,ForceMode2D.Impulse);
@@ -150,6 +166,43 @@ public class PlayerController : MonoBehaviour
         //    return;
         playerAnimation.PlayAttack();
         isAttack = true;
+    }
+    //滑铲
+    private void Slide(InputAction.CallbackContext obj)
+    {
+        if (!isSlide&&physicsCheck.isGround && character.currentPower >= slidePowerCost)
+        {
+            isSlide = true;
+
+            var targetPos = new Vector3(transform.position.x + slideDistance * transform.localScale.x, transform.position.y);
+
+            StartCoroutine(TriggerSlide(targetPos));
+            //每次滑铲都运行能量减少代码
+            character.Onslide(slidePowerCost);
+        }
+    }
+    private IEnumerator TriggerSlide(Vector3 target)
+    {
+
+        do
+        {
+            yield return null;
+            //前方没有地面停止滑动
+            if (!physicsCheck.isGround)
+            {
+                 break;
+            }
+            //滑铲过程中撞墙
+            if(physicsCheck.touchLeftWall && transform.localScale.x<0f || physicsCheck.touchRightWall && transform.localScale.x>0f)
+            {
+                isSlide = false;
+                break;
+            }
+            //向目标方向滑动
+            rb.MovePosition(new Vector2(transform.position.x + transform.localScale.x * slideSpeed, transform.position.y));
+        } while (MathF.Abs(target.x- transform.position.x)>0.1f);
+        
+        isSlide = false;
     }
     #region UnityEvent
     //受到伤害时人物的移动
@@ -184,8 +237,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
-        //判断是否死亡，死亡更换标签
-        if (isDie)
+        //判断是否死亡或滑铲，死亡或滑铲更换标签
+        if (isDie || isSlide)
         {
             gameObject.layer = LayerMask.NameToLayer("Enemy");
         }

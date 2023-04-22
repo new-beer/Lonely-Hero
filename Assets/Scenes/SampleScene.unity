@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b40e9555e382a943bc9747a65074d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCharacter: {fileID: 0}
   healthImage: {fileID: 198580660}
   healthDelayImage: {fileID: 752081070}
   powerImage: {fileID: 279043494}
@@ -1488,7 +1489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531274055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.53, y: -0.74, z: 0}
+  m_LocalPosition: {x: -5.05, y: 0.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1516,11 +1517,15 @@ MonoBehaviour:
   jumpForce: 16.5
   wallJumpForce: 10
   hurtForce: 8
+  slideDistance: 4
+  slideSpeed: 0.2
+  slidePowerCost: 5
   isCrouch: 0
   isHurt: 0
   isDie: 0
   isAttack: 0
   wallJump: 0
+  isSlide: 0
   normal: {fileID: 6200000, guid: b43f66d2ddb53964f9707f3924a3f300, type: 2}
   wall: {fileID: 6200000, guid: cf7d4dbc8f0196140a7cc1fb1ec9c35f, type: 2}
 --- !u!70 &531274059
@@ -1657,9 +1662,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  maxPower: 10
+  currentPower: 0
+  powerRecoverSpeed: 1.2
   invulnerableDuration: 1.5
   invulnerableCounter: 0
-  invulnerable: 0
+  invulnerable: 1
   OnHealthChange:
     m_PersistentCalls:
       m_Calls:
@@ -2348,6 +2356,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
+  maxPower: 0
+  currentPower: 0
+  powerRecoverSpeed: 0
   invulnerableDuration: 0.1
   invulnerableCounter: 0
   invulnerable: 0
@@ -2790,6 +2801,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
+  maxPower: 0
+  currentPower: 0
+  powerRecoverSpeed: 0
   invulnerableDuration: 1
   invulnerableCounter: 0
   invulnerable: 0
@@ -2972,7 +2986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213271915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.18, y: -2.07, z: 0}
+  m_LocalPosition: {x: -11.25, y: -2.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3100,6 +3114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
+  maxPower: 0
+  currentPower: 0
+  powerRecoverSpeed: 0
   invulnerableDuration: 0.7
   invulnerableCounter: 0
   invulnerable: 0
