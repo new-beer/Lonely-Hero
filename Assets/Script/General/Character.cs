@@ -44,6 +44,18 @@ public class Character : MonoBehaviour
             currentPower += Time.deltaTime * powerRecoverSpeed;
         }
     }
+    //触发水面死亡
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            //死亡,更新血量
+            currentHealth = 0;
+            OnHealthChange?.Invoke(this);
+            OnDie?.Invoke();
+
+        }
+    }
     //接受伤害
     public void TakeDamge(Attack attacker)
     {
