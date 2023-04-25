@@ -21,7 +21,7 @@ public class Chest : MonoBehaviour, IInteractable
     }
     public void TirggerAction()
     {
-        Debug.Log("Open Chest");
+        //Debug.Log("Open Chest");
         if (!isDone)
         {
             OpenChest();

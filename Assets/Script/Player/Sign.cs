@@ -62,7 +62,7 @@ public class Sign : MonoBehaviour
     {
         if(actionChange == InputActionChange.ActionStarted)
         {
-            Debug.Log(((InputAction)obj).activeControl.device);
+           // Debug.Log(((InputAction)obj).activeControl.device);
             //切换不同设备输出
             var d = ((InputAction)obj).activeControl.device;
             switch (d.device)
