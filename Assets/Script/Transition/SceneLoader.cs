@@ -11,10 +11,14 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public Transform playerTrans;
+    public Vector3 firstPosition;
 
     [Header("事件监听")]
     public SceneLoadEventSO loadEventSO;
     public GameSceneSO firstLoadScene;
+
+    [Header("广播")]
+    public VoidEVentSO afterSceneLoadedEvent;
 
     private GameSceneSO currentSceneLoad;
     private GameSceneSO sceneToLoad;
@@ -23,11 +27,17 @@ public class SceneLoader : MonoBehaviour
     public float fadeDuration;
     private bool fadeScreen;
     private bool isLoading;
+
     private void Awake()
     {
         
-        currentSceneLoad = firstLoadScene;
-        currentSceneLoad.senceReference.LoadSceneAsync(LoadSceneMode.Additive);
+        //currentSceneLoad = firstLoadScene;
+        //currentSceneLoad.senceReference.LoadSceneAsync(LoadSceneMode.Additive);
+    }
+
+    private void Start()
+    {
+        NewGame();
     }
     private void OnEnable()
     {
@@ -38,8 +48,25 @@ public class SceneLoader : MonoBehaviour
         loadEventSO.LoadRequestEvent -= OnLoadRequestEvent;
     }
 
+    private void NewGame()
+    {
+        sceneToLoad = firstLoadScene;
+        OnLoadRequestEvent(sceneToLoad,firstPosition,true);
+    }
+
+    /// <summary>
+    /// 场景加载事件请求
+    /// </summary>
+    /// <param name="locationToLoad"></param>
+    /// <param name="posToGo"></param>
+    /// <param name="fadeScreen"></param>
     private void OnLoadRequestEvent(GameSceneSO locationToLoad, Vector3 posToGo, bool fadeScreen)
     {
+        if (isLoading)
+        {
+            return;
+        }
+        isLoading = true;
         sceneToLoad = locationToLoad;
         positionToGo = posToGo;
         this.fadeScreen = fadeScreen;
@@ -47,6 +74,10 @@ public class SceneLoader : MonoBehaviour
         if (currentSceneLoad != null)
         {
             StartCoroutine(UnLoadPreviousScene());
+        }
+        else
+        {
+            LoadNewScene();
         }
     }
     private IEnumerator UnLoadPreviousScene()
@@ -59,6 +90,10 @@ public class SceneLoader : MonoBehaviour
 
         //删除旧场景
         yield return currentSceneLoad.senceReference.UnLoadScene();
+
+        //切换场景时，关闭人物
+        playerTrans.gameObject.SetActive(false);
+       
         LoadNewScene();
         
     }
@@ -76,14 +111,20 @@ public class SceneLoader : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
     {
-        currentSceneLoad = sceneToLoad;
 
+        currentSceneLoad = sceneToLoad;
+        //传送后移动人物坐标
         playerTrans.position = positionToGo;
+
+        playerTrans.gameObject.SetActive(true);
         if (fadeScreen)
         {
             //TODO
         }
 
+        isLoading = false;
 
+        //场景加载完成后事件
+        afterSceneLoadedEvent.RaiseEvent();
     }
 }

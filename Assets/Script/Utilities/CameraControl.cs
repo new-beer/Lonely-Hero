@@ -7,6 +7,10 @@ using System;
 
 public class CameraControl : MonoBehaviour
 {
+    [Header("监听")]
+    public VoidEVentSO afterSceneLoadedEvent;
+
+
     private CinemachineConfiner2D confiner2D;
     public CinemachineImpulseSource impulseSource;
     public VoidEVentSO cameraShakeEvent;
@@ -17,22 +21,29 @@ public class CameraControl : MonoBehaviour
     private void OnEnable()
     {
         cameraShakeEvent.OnEventRaised += OnCamerShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         cameraShakeEvent.OnEventRaised -= OnCamerShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
     }
     private void OnCamerShakeEvent()
     {
         impulseSource.GenerateImpulse();
     }
-
-    //TODO:场景切换后更改
-    private void Start()
+    private void OnAfterSceneLoadedEvent()
     {
         GetNewCameraBounds();
     }
+
+
+    
+    //private void Start()
+    //{
+    //    GetNewCameraBounds();
+    //}
     private void GetNewCameraBounds()
     {
         var obj = GameObject.FindGameObjectWithTag("Bounds");
