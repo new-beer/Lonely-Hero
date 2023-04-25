@@ -11,6 +11,7 @@ public class Sign : MonoBehaviour
     private Animator animtor;
     public GameObject signSprite;
     public Transform plaryTransform;
+    public IInteractable targetItem;
     public bool canPress;
 
     private void Awake()
@@ -24,9 +25,8 @@ public class Sign : MonoBehaviour
     private void OnEnable()
     {
         InputSystem.onActionChange += OnActionChange;
+        playerInput.Player.Confirm.started += Onconfirm;
     }
-
-    
 
     private void Update()
     {
@@ -35,7 +35,29 @@ public class Sign : MonoBehaviour
         //固定标识方向
         signSprite.transform.localScale = plaryTransform.localScale;
     }
-    //识别不同设备的输入
+    //互动
+    private void Onconfirm(InputAction.CallbackContext obj)
+    {
+        if (canPress)
+        {
+            targetItem.TirggerAction();
+            GetComponent<AudioDefination>()?.PlayAudioClip();
+        }
+    }
+    //触发可以互动组件
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            canPress = true;
+            targetItem = other.GetComponent<IInteractable>();
+        }
+    }
+    /// <summary>
+    /// 切换设备的同时切换动画
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="actionChange"></param>
     private void OnActionChange(object obj, InputActionChange actionChange)
     {
         if(actionChange == InputActionChange.ActionStarted)
@@ -55,17 +77,10 @@ public class Sign : MonoBehaviour
         }
     }
 
-    //触发可以互动组件
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Interactable"))
-        {
-            canPress = true;
-        }
-    }
     //脱离触发
     private void OnTriggerExit2D(Collider2D other)
     {
         canPress = false;
+
     }
 }

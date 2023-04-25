@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
             //ÌøÔ¾´ò¶Ï»¬²ùĞ­³Ì
             isSlide = false;
             StopAllCoroutines();
+            GetComponent<AudioDefination>()?.PlayAudioClip();
         }
         //ÌùÇ½Ìø
         else if (physicsCheck.onWall)

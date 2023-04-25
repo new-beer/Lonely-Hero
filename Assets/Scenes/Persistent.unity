@@ -2684,6 +2684,7 @@ GameObject:
   - component: {fileID: 1750583764}
   - component: {fileID: 1750583766}
   - component: {fileID: 1750583765}
+  - component: {fileID: 1750583767}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -2767,6 +2768,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6497574, y: 0.93527305}
   m_EdgeRadius: 0
+--- !u!114 &1750583767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750583763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4cdb496cb4b204e8b618fce95210e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAudioEvent: {fileID: 11400000, guid: 02a56422b57c56b49831adf28cf16f2e, type: 2}
+  audioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  playOnEnable: 0
 --- !u!1 &1837268385
 GameObject:
   m_ObjectHideFlags: 0

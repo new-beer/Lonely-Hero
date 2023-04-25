@@ -2505,7 +2505,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: -5, z: 0}
@@ -2538,7 +2538,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: -4, z: 0}
@@ -2637,7 +2637,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: -2, z: 0}
@@ -2725,7 +2725,7 @@ Tilemap:
       - {fileID: -2138159695, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 1948998321, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 742588208, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: -1, z: 0}
@@ -2747,7 +2747,7 @@ Tilemap:
       - {fileID: -2138159695, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 1948998321, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 742588208, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: 0, z: 0}
@@ -2802,7 +2802,7 @@ Tilemap:
       - {fileID: 1196881722, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 684878930, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -1872183871, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -2934,6 +2934,7 @@ GameObject:
   - component: {fileID: 499793880}
   - component: {fileID: 499793882}
   - component: {fileID: 499793881}
+  - component: {fileID: 499793883}
   m_Layer: 0
   m_Name: Chest2_0
   m_TagString: Interactable
@@ -2950,11 +2951,11 @@ Transform:
   m_GameObject: {fileID: 499793879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.35, y: 35.98, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0239, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1053861646}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &499793881
 BoxCollider2D:
@@ -3053,6 +3054,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &499793883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499793879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315dfc72c35130147a37038544d6fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openSprite: {fileID: 1716366029, guid: f3beee8c073bd294a90d8269f6ebc2d6, type: 3}
+  closeSprite: {fileID: 1415856333, guid: f3beee8c073bd294a90d8269f6ebc2d6, type: 3}
+  isDone: 0
 --- !u!1 &608406110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4201,7 +4217,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -3, y: -3, z: 0}
@@ -4234,7 +4250,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -5, y: -2, z: 0}
@@ -4278,7 +4294,7 @@ Tilemap:
       - {fileID: 687648088, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: -609437102, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 714991059, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: -1, z: 0}
@@ -4333,7 +4349,7 @@ Tilemap:
       - {fileID: -2138159695, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 1948998321, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
       - {fileID: 742588208, guid: 2bf924add828cd8498c52021a01178ae, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: 0, z: 0}
@@ -4815,38 +4831,6 @@ MonoBehaviour:
   damage: 10
   attackRang: 1.1
   attackRate: 1
---- !u!1 &1053861645
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053861646}
-  m_Layer: 0
-  m_Name: Chest
-  m_TagString: Interactable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1053861646
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053861645}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 499793880}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1084514774
 GameObject:
   m_ObjectHideFlags: 0
@@ -31203,6 +31187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1964830422}
   - component: {fileID: 1964830421}
+  - component: {fileID: 1964830424}
+  - component: {fileID: 1964830423}
   m_Layer: 0
   m_Name: Mine Stone
   m_TagString: Interactable
@@ -31277,6 +31263,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964830423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964830420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb511b66568a91040b8d07f6397ac3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToGo: {x: 0, y: 0, z: 0}
+--- !u!61 &1964830424
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964830420}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.055503845, y: -1.6499987}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8, y: 10}
+    newSize: {x: 8, y: 10}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.6347733, y: 4.2716045}
+  m_EdgeRadius: 0
 --- !u!1 &2035521155
 GameObject:
   m_ObjectHideFlags: 0
