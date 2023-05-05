@@ -8,6 +8,11 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("监听事件")]
+    public SceneLoadEventSO loadEvent;
+    public VoidEVentSO afterSceneLoadedEvent;
+
+
     public PlayerInputController inputControl;
     public Rigidbody2D rb;
     public CapsuleCollider2D capsuleCollider2D;
@@ -81,11 +86,17 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputControl.Enable();
+        loadEvent.LoadRequestEvent += OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterScenceLoadedEvent;
     }
     private void OnDisable()
     {
         inputControl.Disable();
+        loadEvent.LoadRequestEvent -= OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRaised -= OnAfterScenceLoadedEvent;
     }
+
+
     private void Update()
     {
         //检测每帧键盘手柄的输入
@@ -103,6 +114,17 @@ public class PlayerController : MonoBehaviour
     //    Debug.Log(other.name);
     //}
     //人物位置移动
+
+    //更换场景时停止控制
+    private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
+    {
+        inputControl.Player.Disable();
+    }
+    //更换场景后恢复控制
+    private void OnAfterScenceLoadedEvent()
+    {
+        inputControl.Player.Enable();
+    }
     public void Move()
     {
         if(!isCrouch&&!wallJump)
