@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
+    [Header("监听事件")]
+    public VoidEVentSO newGameEvent;
     [Header("基本属性")]
     public float maxHealth;
     public float currentHealth;
@@ -20,12 +22,28 @@ public class Character : MonoBehaviour
     public UnityEvent<Transform> OnTakeDamage; //创建被攻击事件
     public UnityEvent OnDie; //创建死亡事件
 
-    private void Start()
+
+    //新游戏开始时人物血量恢复
+    private void NewGame()
     {
         currentHealth = maxHealth;
         currentPower = maxPower; ;
         OnHealthChange?.Invoke(this);
 
+    }
+    private void Start()
+    {
+        //新游戏开始时敌人血量变满
+        currentHealth = maxHealth;
+    }
+    //确保在新游戏开始时人物血量满
+    private void OnEnable()
+    {
+        newGameEvent.OnEventRaised += NewGame;
+    }
+    private void OnDisable()
+    {
+        newGameEvent.OnEventRaised -= NewGame;
     }
     private void Update()
     {

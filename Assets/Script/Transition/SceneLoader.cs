@@ -12,15 +12,19 @@ public class SceneLoader : MonoBehaviour
 {
     public Transform playerTrans;
     public Vector3 firstPosition;
+    public Vector3 menuPosition;
 
     [Header("事件监听")]
     public SceneLoadEventSO loadEventSO;
-    public GameSceneSO firstLoadScene;
+    public VoidEVentSO newGameEvent;
 
     [Header("广播")]
     public VoidEVentSO afterSceneLoadedEvent;
     public FadeEventSO fadeEvent;
-
+    public SceneLoadEventSO unLoadedSceneEvent;
+    [Header("场景")]
+    public GameSceneSO firstLoadScene;
+    public GameSceneSO menuScene;
     private GameSceneSO currentSceneLoad;
     private GameSceneSO sceneToLoad;
     private Vector3 positionToGo;
@@ -31,29 +35,34 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        
+
         //currentSceneLoad = firstLoadScene;
         //currentSceneLoad.senceReference.LoadSceneAsync(LoadSceneMode.Additive);
+        
     }
 
     private void Start()
     {
-        NewGame();
+        // NewGame();
+        loadEventSO.RaiseLoadRequestEvent(menuScene, menuPosition, true);
     }
     private void OnEnable()
     {
         loadEventSO.LoadRequestEvent += OnLoadRequestEvent;
+        newGameEvent.OnEventRaised += NewGame;
     }
     private void OnDisable()
     {
         loadEventSO.LoadRequestEvent -= OnLoadRequestEvent;
+        newGameEvent.OnEventRaised -= NewGame;
     }
 
     private void NewGame()
     {
         sceneToLoad = firstLoadScene;
-       // OnLoadRequestEvent(sceneToLoad,firstPosition,true);
-       loadEventSO.RaiseLoadRequestEvent(sceneToLoad, firstPosition, true);
+        //OnLoadRequestEvent(sceneToLoad,firstPosition,true);
+        loadEventSO.RaiseLoadRequestEvent(sceneToLoad, firstPosition, true);
+
     }
 
     /// <summary>
@@ -90,6 +99,9 @@ public class SceneLoader : MonoBehaviour
             fadeEvent.FadeIn(fadeDuration);
         }
         yield return new WaitForSeconds(fadeDuration);
+
+        //广播事件调整血条显示
+        unLoadedSceneEvent.RaiseLoadRequestEvent(sceneToLoad, positionToGo, true);  
 
         //删除旧场景
         yield return currentSceneLoad.senceReference.UnLoadScene();
