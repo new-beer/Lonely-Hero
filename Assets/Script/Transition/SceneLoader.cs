@@ -19,6 +19,7 @@ public class SceneLoader : MonoBehaviour
 
     [Header("广播")]
     public VoidEVentSO afterSceneLoadedEvent;
+    public FadeEventSO fadeEvent;
 
     private GameSceneSO currentSceneLoad;
     private GameSceneSO sceneToLoad;
@@ -85,6 +86,7 @@ public class SceneLoader : MonoBehaviour
         if (fadeScreen)
         {
             //TODO:实现渐入渐出
+            fadeEvent.FadeIn(fadeDuration);
         }
         yield return new WaitForSeconds(fadeDuration);
 
@@ -119,7 +121,8 @@ public class SceneLoader : MonoBehaviour
         playerTrans.gameObject.SetActive(true);
         if (fadeScreen)
         {
-            //TODO
+            //TODO:逐渐透明
+            fadeEvent.FadeOut(fadeDuration);
         }
 
         isLoading = false;
