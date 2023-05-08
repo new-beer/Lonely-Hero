@@ -5,7 +5,7 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour,IInteractable
 {
     [Header("广播")]
-    public VoidEVentSO LoadGameEvent;
+    public VoidEVentSO saveDataEvent;
 
     [Header("变量参数")]
     public SpriteRenderer spriteRenderer;
@@ -28,7 +28,7 @@ public class SavePoint : MonoBehaviour,IInteractable
             isDone = true;
             lightObj.SetActive (true);
             //TODO 实现保存
-            LoadGameEvent.RaiseEvent();
+            saveDataEvent.RaiseEvent();
 
             this.gameObject.tag = "Untagged";
         }
